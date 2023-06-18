@@ -2,15 +2,12 @@
 require_once 'db_connect.php';
 require_once 'ImageManager.php';
 require_once 'paginate.php';
-// Create a new ImageManager instance for train images
+
 $imageManager = new ImageManager(true, $conn);
 
-// Retrieve the train images and labels
 [$trainImages, $trainLabels] = $imageManager->getImagesAndLabels();
 
 
-
-// Retrieve the pagination data
 $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $maxPerPage = 20;
 [$visibleImages, $visibleLabels, $totalPages] = paginateImages($trainImages, $trainLabels, $currentPage, $maxPerPage);
@@ -21,7 +18,7 @@ $maxPerPage = 20;
 <html>
 <head>
     <title>Train images</title>
-    <!-- Include Bootstrap CSS -->
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
@@ -188,7 +185,7 @@ $maxPerPage = 20;
         ?>
     </div>
 
-    <!-- Pagination -->
+
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             <?php if ($currentPage > 1): ?>
@@ -225,9 +222,9 @@ $maxPerPage = 20;
         </ul>
     </nav>
 </div>
-<!-- Include jQuery library -->
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<!-- Include SweetAlert2 library -->
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function addImage() {
@@ -328,11 +325,11 @@ $maxPerPage = 20;
                         })
                             .done(function() {
                                 Swal.fire('Success!', 'Label and name updated successfully', 'success');
-                                // Update the label and name in the UI
+
                                 $('.item[data-id="' + imageId + '"] .label').text(label);
                                 $('.item[data-id="' + imageId + '"] .name').text(name);
                                 setTimeout(function() {
-                                    location.reload(); // Reload the page after 1 second delay
+                                    location.reload();
                                 }, 1000);
                             })
                             .fail(function() {

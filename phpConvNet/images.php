@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Bootstrap Site</title>
 
-    <!-- Load bootstrap and jQuery from CDN -->
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -14,7 +14,7 @@
     <style>
         body {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Divide the page into two columns */
+            grid-template-columns: repeat(2, 1fr);
             height: 100vh;
             margin: 0;
             padding: 0;
@@ -50,11 +50,11 @@
         }
 
         .bg-pastel1 {
-            background-color: #b1ecfe; /* Soft Peach */
+            background-color: #b1ecfe;
         }
 
         .bg-pastel2 {
-            background-color: #F5FFFA; /* Mint Cream */
+            background-color: #F5FFFA;
         }
 
         h1 {

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Bootstrap Site</title>
 
-    <!-- Load bootstrap and jQuery from CDN -->
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -81,10 +81,10 @@
     <a href="images.php"><h1>Images</h1></a>
 </div>
 <div class="carousel-item bg-pastel2">
-    <a href="model.php"><h1>Model</h1></a>
+    <a href="models.php"><h1>Models</h1></a>
 </div>
 <div class="carousel-item bg-pastel3">
-    <a href="history.php"><h1>History</h1></a>
+    <a href="results.php"><h1>Results</h1></a>
 </div>
 </body>
 

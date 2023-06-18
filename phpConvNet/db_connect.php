@@ -1,7 +1,7 @@
 <?php
-$host = '';
-$dbname = '';
-$username = '';
+$host = 'localhost';
+$dbname = 'image_data';
+$username = 'root';
 $password = '';
 
 try {

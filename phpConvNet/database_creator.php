@@ -1,10 +1,7 @@
 <?php
 require_once 'db_connect.php';
 
-$conn->exec("CREATE DATABASE IF NOT EXISTS php_image_data");
 
-// USE php_image_data;
-$conn->exec("USE php_image_data");
 
 $conn->exec("CREATE TABLE IF NOT EXISTS train_labels (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -37,7 +34,7 @@ $conn->exec("CREATE TABLE IF NOT EXISTS test_images (
 
 $conn->exec("CREATE TABLE IF NOT EXISTS results (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    iteration INT,
+    identifier INT ,
     train_acc FLOAT,
     test_acc FLOAT,
     date DATE,
