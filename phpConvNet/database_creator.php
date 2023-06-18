@@ -1,6 +1,50 @@
 <?php
 require_once 'db_connect.php';
 
+$conn->exec("CREATE DATABASE IF NOT EXISTS php_image_data");
+
+// USE php_image_data;
+$conn->exec("USE php_image_data");
+
+$conn->exec("CREATE TABLE IF NOT EXISTS train_labels (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    label INT
+)");
+
+
+$conn->exec("CREATE TABLE IF NOT EXISTS test_labels (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    label INT
+)");
+
+
+$conn->exec("CREATE TABLE IF NOT EXISTS train_images (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    path text,
+    img_id INT,
+    FOREIGN KEY (img_id) REFERENCES train_labels(id)
+)");
+
+
+$conn->exec("CREATE TABLE IF NOT EXISTS test_images (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    path text,
+    img_id INT,
+    FOREIGN KEY (img_id) REFERENCES test_labels(id)
+)");
+
+$conn->exec("CREATE TABLE IF NOT EXISTS results (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    iteration INT,
+    train_acc FLOAT,
+    test_acc FLOAT,
+    date DATE,
+    params text
+)");
+
+
 $folderPathDog = 'PetImages/Dog';
 $folderPathCat = 'PetImages/Cat';
 
@@ -12,7 +56,6 @@ $images = array_merge($imagesDog, $imagesCat);
 $labels = array_merge(array_fill(0, count($imagesDog), 0), array_fill(0, count($imagesCat), 1));
 
 $indices = range(0, count($images) - 1);
-
 shuffle($indices);
 $shuffledImages = [];
 $shuffledLabels = [];

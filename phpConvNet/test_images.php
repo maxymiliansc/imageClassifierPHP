@@ -3,24 +3,24 @@ require_once 'db_connect.php';
 require_once 'ImageManager.php';
 require_once 'paginate.php';
 // Create a new ImageManager instance for train images
-$imageManager = new ImageManager(true, $conn);
+$imageManager = new ImageManager(false, $conn);
 
 // Retrieve the train images and labels
-[$trainImages, $trainLabels] = $imageManager->getImagesAndLabels();
+[$testImages, $testLabels] = $imageManager->getImagesAndLabels();
 
 
 
 // Retrieve the pagination data
 $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $maxPerPage = 20;
-[$visibleImages, $visibleLabels, $totalPages] = paginateImages($trainImages, $trainLabels, $currentPage, $maxPerPage);
+[$visibleImages, $visibleLabels, $totalPages] = paginateImages($testImages, $testLabels, $currentPage, $maxPerPage);
 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Train images</title>
+    <title>Test images</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
@@ -261,7 +261,8 @@ $maxPerPage = 20;
                     data.append('label', labelValue);
                     data.append('name', name);
                     data.append('image', image);
-                    data.append('isTrain', true);
+                    data.append('isTrain', 0);
+
                     return $.ajax({
                         url: 'add.php',
                         method: 'POST',
@@ -323,7 +324,7 @@ $maxPerPage = 20;
                                 id: imageId,
                                 label: labelValue,
                                 name: name,
-                                isTrain: true,
+                                isTrain: 0,
                             },
                         })
                             .done(function() {
@@ -364,7 +365,7 @@ $maxPerPage = 20;
                         method: 'POST',
                         data: {
                             id: imageId,
-                            isTrain: true,
+                            isTrain: 0,
                         },
                     })
                         .done(function() {
@@ -385,3 +386,4 @@ $maxPerPage = 20;
 </script>
 </body>
 </html>
+
