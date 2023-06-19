@@ -14,10 +14,10 @@ $query = "UPDATE results SET train_acc = '$trainAccuracy', test_acc = '$testAccu
 
 
 if ($conn->query($query) === TRUE) {
-    // Success
+
     echo 'Results updated successfully';
 } else {
-    // Error
+
     echo 'Error updating results: ' . $conn->error;
 }
 

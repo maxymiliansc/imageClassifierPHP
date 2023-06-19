@@ -21,7 +21,7 @@ const connection = mysql.createConnection({
     database: 'image_data'
 });
 
-const CHUNK_SIZE = 40; // adjust this to a number that works well for your server
+const CHUNK_SIZE = 40;
 
 app.get('/api/retrieveData/:table/:chunkIndex', async (req, res) => {
     const { table, chunkIndex } = req.params;

@@ -65,42 +65,23 @@
         </thead>
         <tbody>
         <?php
-        // Database credentials
-        $host = 'localhost';
-        $user = 'root';
-        $password = '';
-        $database = 'image_data';
-
-        // Connect to the database
-        $connection = new mysqli($host, $user, $password, $database);
-        if ($connection->connect_error) {
-            die('Connection failed: ' . $connection->connect_error);
-        }
-
+        require_once 'db_connect.php';
 
         $query = 'SELECT * FROM results';
-        $result = $connection->query($query);
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($result) > 0) {
+            foreach ($result as $row) {
                 echo '<tr>';
-                echo '<td>' . $row['identifier'] . '</td>';
-                echo '<td>' . $row['train_acc'] . '</td>';
-                echo '<td>' . $row['test_acc'] . '</td>';
-                echo '<td>' . $row['date'] . '</td>';
-                echo '<td>' . $row['params'] . '</td>';
-                echo '<td>';
-                echo '<a href="#" class="btn btn-edit btn-sm" data-identifier="' . $row['identifier'] . '" data-train-accuracy="' . $row['train_acc'] . '" data-test-accuracy="' . $row['test_acc'] . '" data-date="' . $row['date'] . '" data-params="' . $row['params'] . '">Edit</a> ';
-                echo '<button class="btn btn-delete btn-sm" data-identifier="' . $row['identifier'] . '">Delete</button>';
-                echo '</td>';
+                // ...other table data here...
                 echo '</tr>';
             }
         } else {
             echo '<tr><td colspan="6">No results found</td></tr>';
         }
-
-
-        $connection->close();
         ?>
         </tbody>
     </table>

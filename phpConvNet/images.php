@@ -4,72 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Bootstrap Site</title>
+    <title>Image classifier</title>
 
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="images_models.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <style>
-        body {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            height: 100vh;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        .carousel-item {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.5s;
-            height: 100%;
-        }
-
-        .carousel-item:hover {
-            transform: scale(1.05);
-        }
-
-        .carousel-item::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            transition: background 0.5s;
-        }
-
-        .carousel-item:hover::before {
-            background: rgba(0, 0, 0, 0);
-        }
-
-        .bg-pastel1 {
-            background-color: #b1ecfe;
-        }
-
-        .bg-pastel2 {
-            background-color: #F5FFFA;
-        }
-
-        h1 {
-            color: #333;
-            font-size: 4em;
-            z-index: 1;
-        }
-
-        .carousel-item a {
-            text-decoration: none;
-            color: inherit;
-            position: relative;
-            z-index: 2;
-        }
-    </style>
 </head>
 
 <body>

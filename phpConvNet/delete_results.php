@@ -1,47 +1,27 @@
 <?php
+require_once 'db_connect.php';
 
 $identifier = $_POST['identifier'];
-
-// Database credentials
-$host = 'localhost';
-$user = 'root';
-$password = '';
-$database = 'image_data';
-
-
-$conn = new mysqli($host, $user, $password, $database);
-if ($conn->connect_error) {
-    die('Connection failed: ' . $conn->connect_error);
-}
-
 $response = [];
 
 if (!empty($identifier)) {
-
     $query = "DELETE FROM results WHERE identifier = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param('s', $identifier);
+    $stmt->bindParam(1, $identifier, PDO::PARAM_STR);
 
-
-    if ($stmt->execute()) {
+    try {
+        $stmt->execute();
         $response['success'] = true;
         $response['message'] = 'Results deleted successfully';
-    } else {
+    } catch(PDOException $e) {
         $response['success'] = false;
-        $response['message'] = 'Error deleting results: ' . $stmt->error;
+        $response['message'] = 'Error deleting results: ' . $e->getMessage();
     }
-
-
-    $stmt->close();
 } else {
     $response['success'] = false;
     $response['message'] = 'Identifier is missing or empty';
 }
 
-
 header('Content-Type: application/json');
 echo json_encode($response);
-
-
-$conn->close();
 ?>
