@@ -65,23 +65,34 @@
         </thead>
         <tbody>
         <?php
+
         require_once 'db_connect.php';
+        try {
+            $query = 'SELECT * FROM results';
+            $result = $conn->query($query);
 
-        $query = 'SELECT * FROM results';
-        $stmt = $conn->prepare($query);
-        $stmt->execute();
-
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        if (count($result) > 0) {
-            foreach ($result as $row) {
-                echo '<tr>';
-                // ...other table data here...
-                echo '</tr>';
+            if ($result->rowCount() > 0) {
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    echo '<tr>';
+                    echo '<td>' . $row['identifier'] . '</td>';
+                    echo '<td>' . $row['train_acc'] . '</td>';
+                    echo '<td>' . $row['test_acc'] . '</td>';
+                    echo '<td>' . $row['date'] . '</td>';
+                    echo '<td>' . $row['params'] . '</td>';
+                    echo '<td>';
+                    echo '<a href="#" class="btn btn-edit btn-sm" data-identifier="' . $row['identifier'] . '" data-train-accuracy="' . $row['train_acc'] . '" data-test-accuracy="' . $row['test_acc'] . '" data-date="' . $row['date'] . '" data-params="' . $row['params'] . '">Edit</a> ';
+                    echo '<button class="btn btn-delete btn-sm" data-identifier="' . $row['identifier'] . '">Delete</button>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
+            } else {
+                echo '<tr><td colspan="6">No results found</td></tr>';
             }
-        } else {
-            echo '<tr><td colspan="6">No results found</td></tr>';
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
         }
+
+        $conn = null;
         ?>
         </tbody>
     </table>
